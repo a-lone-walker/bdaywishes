@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashok Kadagala's Futuristic Birthday</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts (Orbitron for futuristic vibe) -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Ashok's B-Day 2025</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#timer">Timer</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#wishes-form">Wish Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#wishes-wall">Wishes</a></li>
+                    <li class="nav-item"><button id="darkModeToggle" class="btn btn-outline-light">Dark Mode</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Timer -->
+    <section id="timer" class="hero-section text-center">
+        <canvas id="particleCanvas"></canvas>
+        <h1 class="display-4">Ashok Kadagala's Birthday Countdown</h1>
+        <p class="lead">April 11, 2025</p>
+        <div id="countdown" class="countdown neon-text"></div>
+    </section>
+
+    <!-- Wishes Form -->
+    <section id="wishes-form" class="container my-5">
+        <h2 class="text-center neon-text">Send Your Cosmic Wishes</h2>
+        <form id="wishForm" class="row g-3">
+            <div class="col-md-6">
+                <input type="text" id="name" class="form-control futuristic-input" placeholder="Your Name (optional)">
+            </div>
+            <div class="col-md-12">
+                <textarea id="message" class="form-control futuristic-input" placeholder="Your Birthday Wish" rows="3" required></textarea>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Audio Message</label>
+                <input type="file" id="audio" class="form-control futuristic-input" accept="audio/*">
+                <div id="audioProgress" class="progress mt-2" style="display: none;">
+                    <div class="progress-bar bg-success" role="progressbar"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Video Message</label>
+                <input type="file" id="video" class="form-control futuristic-input" accept="video/*">
+                <div id="videoProgress" class="progress mt-2" style="display: none;">
+                    <div class="progress-bar bg-success" role="progressbar"></div>
+                </div>
+            </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary futuristic-btn">Transmit Wish</button>
+            </div>
+        </form>
+        <div id="formFeedback" class="text-center mt-3"></div>
+    </section>
+
+    <!-- Wishes Wall -->
+    <section id="wishes-wall" class="container my-5">
+        <h2 class="text-center neon-text">Galactic Wish Collection</h2>
+        <div class="row" id="wishes"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-3">
+        <p>Powered by xAI for Ashok Kadagala | 2025</p>
+    </footer>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBwAjzFG7fIeUJBanPTPoS5myjHv5LQphg",
+            authDomain: "ashoksbday.firebaseapp.com",
+            projectId: "ashoksbday",
+            storageBucket: "ashoksbday.firebasestorage.app",
+            messagingSenderId: "787339265856",
+            appId: "1:787339265856:web:8ba8141b27a18275b41ca5",
+            measurementId: "G-XSJ28P5H3C"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>

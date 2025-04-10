@@ -1,0 +1,101 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(135deg, #0D1B2A, #1B263B);
+    color: #E0E1DD;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.navbar {
+    background: rgba(11, 29, 54, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.hero-section {
+    position: relative;
+    padding: 100px 20px;
+    background: url('https://www.transparenttextures.com/patterns/stardust.png');
+    overflow: hidden;
+}
+
+#particleCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.neon-text {
+    color: #00FFFF;
+    text-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 20px #FF00FF;
+}
+
+.countdown {
+    font-size: 48px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #FF00FF;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 10px #00FFFF; }
+    to { box-shadow: 0 0 20px #FF00FF; }
+}
+
+.futuristic-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #00FFFF;
+    color: #E0E1DD;
+}
+
+.futuristic-input::placeholder {
+    color: #778DA9;
+}
+
+.futuristic-btn {
+    background: #FF00FF;
+    border: none;
+    padding: 10px 20px;
+    transition: all 0.3s;
+}
+
+.futuristic-btn:hover {
+    background: #00FFFF;
+    color: #0D1B2A;
+    box-shadow: 0 0 15px #00FFFF;
+}
+
+.wish-card {
+    background: rgba(27, 38, 59, 0.9);
+    border: 1px solid #00FFFF;
+    border-radius: 10px;
+    padding: 15px;
+    transition: transform 0.3s;
+}
+
+.wish-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #FF00FF;
+}
+
+footer {
+    background: #0D1B2A;
+    color: #778DA9;
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode {
+    background: linear-gradient(135deg, #1B263B, #415A77);
+}
+
+body.dark-mode .navbar {
+    background: rgba(65, 90, 119, 0.8);
+}
+
+body.dark-mode .wish-card {
+    background: rgba(65, 90, 119, 0.9);
+}
