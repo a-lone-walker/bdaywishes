@@ -99,3 +99,59 @@ body.dark-mode .navbar {
 body.dark-mode .wish-card {
     background: rgba(65, 90, 119, 0.9);
 }
+
+/* Previous styles remain the same */
+
+/* Add these new styles */
+#audioPreview, #videoPreview {
+    background: rgba(0,0,0,0.2);
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.recording {
+    animation: pulse 1.5s infinite;
+    background: #ff0000 !important;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+}
+
+.recording-audio {
+    background: #FF00FF !important;
+}
+
+.recording-video {
+    background: #00FFFF !important;
+}
+
+.modal-content {
+    background: rgba(27, 38, 59, 0.95);
+    border: 2px solid #00FFFF;
+}
+
+.modal-header {
+    border-bottom: 1px solid #00FFFF;
+}
+
+.modal-title {
+    color: #00FFFF;
+}
+
+.btn-outline-warning {
+    border-color: #FF00FF;
+    color: #FF00FF;
+}
+
+.btn-outline-warning:hover {
+    background: #FF00FF;
+    color: #0D1B2A;
+}
+
+.small {
+    font-size: 0.8rem;
+    color: #778DA9;
+}
