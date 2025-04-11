@@ -24,6 +24,7 @@ function updateTimer() {
 setInterval(updateTimer, 1000);
 
 // Form Submission with Text Message Only
+// Form Submission with Text Message Only
 document.getElementById("wishForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     
@@ -53,10 +54,10 @@ document.getElementById("wishForm").addEventListener("submit", async (e) => {
 
 // Display Wishes
 const wishesDiv = document.getElementById("wishes");
-db.collection("wishes").where("approved", "==", true)
+db.collection("wishes").where("approved", "==", true) // Only fetch approved wishes
   .orderBy("timestamp", "desc")
   .onSnapshot((snapshot) => {
-    wishesDiv.innerHTML = "";
+    wishesDiv.innerHTML = ""; // Clear existing wishes
     snapshot.forEach((doc) => {
         const data = doc.data();
         const col = document.createElement("div");
@@ -66,7 +67,7 @@ db.collection("wishes").where("approved", "==", true)
                 <p><strong>${data.name}</strong>: ${data.message}</p>
             </div>
         `;
-        wishesDiv.appendChild(col);
+        wishesDiv.appendChild(col); // Append the approved wish to the display
     });
 });
 
