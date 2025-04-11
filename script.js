@@ -24,7 +24,6 @@ function updateTimer() {
 setInterval(updateTimer, 1000);
 
 // Form Submission with Text Message Only
-// Form Submission with Text Message Only
 document.getElementById("wishForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     
@@ -129,4 +128,4 @@ document.getElementById("darkModeToggle").addEventListener("click", () => {
 // Load Dark Mode Preference
 if (localStorage.getItem("darkMode") === "true") {
     document.body.classList.add("dark-mode");
-}
+}s
