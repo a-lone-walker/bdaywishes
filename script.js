@@ -173,104 +173,104 @@ setInterval(updateTimer, 1000);
 // });
 
 // Form Submission with Progress
-document.getElementById("wishForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+// document.getElementById("wishForm").addEventListener("submit", async (e) => {
+//     e.preventDefault();
     
-    const name = document.getElementById("name").value;
-    const message = document.getElementById("message").value;
-    const feedback = document.getElementById("formFeedback");
-    const audioFile = audioUpload.files[0];
-    const videoFile = videoUpload.files[0];
+//     const name = document.getElementById("name").value;
+//     const message = document.getElementById("message").value;
+//     const feedback = document.getElementById("formFeedback");
+//     const audioFile = audioUpload.files[0];
+//     const videoFile = videoUpload.files[0];
 
-    if (!message) {
-        feedback.innerHTML = "<div class='alert alert-danger'>Please enter a birthday wish!</div>";
-        return;
-    }
+//     if (!message) {
+//         feedback.innerHTML = "<div class='alert alert-danger'>Please enter a birthday wish!</div>";
+//         return;
+//     }
 
-    let audioURL = "", videoURL = "";
-    const audioProgress = document.getElementById("audioProgress");
-    const videoProgress = document.getElementById("videoProgress");
+//     let audioURL = "", videoURL = "";
+//     const audioProgress = document.getElementById("audioProgress");
+//     const videoProgress = document.getElementById("videoProgress");
 
-    // Upload recorded audio if exists
-    if (audioBlob) {
-        audioProgress.style.display = "block";
-        const audioName = `audio_${Date.now()}.wav`;
-        const audioRef = storage.ref().child(`audio/${audioName}`);
-        const uploadTask = audioRef.put(audioBlob);
+//     // Upload recorded audio if exists
+//     if (audioBlob) {
+//         audioProgress.style.display = "block";
+//         const audioName = `audio_${Date.now()}.wav`;
+//         const audioRef = storage.ref().child(`audio/${audioName}`);
+//         const uploadTask = audioRef.put(audioBlob);
         
-        await new Promise((resolve, reject) => {
-            uploadTask.on("state_changed", 
-                (snapshot) => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    audioProgress.querySelector(".progress-bar").style.width = `${progress}%`;
-                },
-                (error) => {
-                    feedback.innerHTML = "<div class='alert alert-danger'>Audio upload failed!</div>";
-                    console.error("Audio upload error:", error);
-                    audioProgress.style.display = "none";
-                    reject(error);
-                },
-                async () => {
-                    audioURL = await audioRef.getDownloadURL();
-                    console.log("Audio URL:", audioURL);
-                    audioProgress.style.display = "none";
-                    resolve();
-                }
-            );
-        });
-    }
+//         await new Promise((resolve, reject) => {
+//             uploadTask.on("state_changed", 
+//                 (snapshot) => {
+//                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+//                     audioProgress.querySelector(".progress-bar").style.width = `${progress}%`;
+//                 },
+//                 (error) => {
+//                     feedback.innerHTML = "<div class='alert alert-danger'>Audio upload failed!</div>";
+//                     console.error("Audio upload error:", error);
+//                     audioProgress.style.display = "none";
+//                     reject(error);
+//                 },
+//                 async () => {
+//                     audioURL = await audioRef.getDownloadURL();
+//                     console.log("Audio URL:", audioURL);
+//                     audioProgress.style.display = "none";
+//                     resolve();
+//                 }
+//             );
+//         });
+//     }
 
-    // Upload recorded video if exists
-    if (videoBlob) {
-        videoProgress.style.display = "block";
-        const videoName = `video_${Date.now()}.mp4`;
-        const videoRef = storage.ref().child(`video/${videoName}`);
-        const uploadTask = videoRef.put(videoBlob);
+//     // Upload recorded video if exists
+//     if (videoBlob) {
+//         videoProgress.style.display = "block";
+//         const videoName = `video_${Date.now()}.mp4`;
+//         const videoRef = storage.ref().child(`video/${videoName}`);
+//         const uploadTask = videoRef.put(videoBlob);
         
-        await new Promise((resolve, reject) => {
-            uploadTask.on("state_changed", 
-                (snapshot) => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    videoProgress.querySelector(".progress-bar").style.width = `${progress}%`;
-                },
-                (error) => {
-                    feedback.innerHTML = "<div class='alert alert-danger'>Video upload failed!</div>";
-                    console.error("Video upload error:", error);
-                    videoProgress.style.display = "none";
-                    reject(error);
-                },
-                async () => {
-                    videoURL = await videoRef.getDownloadURL();
-                    console.log("Video URL:", videoURL);
-                    videoProgress.style.display = "none";
-                    resolve();
-                }
-            );
-        });
-    }
+//         await new Promise((resolve, reject) => {
+//             uploadTask.on("state_changed", 
+//                 (snapshot) => {
+//                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+//                     videoProgress.querySelector(".progress-bar").style.width = `${progress}%`;
+//                 },
+//                 (error) => {
+//                     feedback.innerHTML = "<div class='alert alert-danger'>Video upload failed!</div>";
+//                     console.error("Video upload error:", error);
+//                     videoProgress.style.display = "none";
+//                     reject(error);
+//                 },
+//                 async () => {
+//                     videoURL = await videoRef.getDownloadURL();
+//                     console.log("Video URL:", videoURL);
+//                     videoProgress.style.display = "none";
+//                     resolve();
+//                 }
+//             );
+//         });
+//     }
 
-    try {
-        await db.collection("wishes").add({
-            name: name || "Anonymous",
-            message,
-            audioURL,
-            videoURL,
-            approved: false,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        console.log("Wish added to Firestore");
-        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-        feedback.innerHTML = "<div class='alert alert-success'>Your wish has been sent for approval!</div>";
-        document.getElementById("wishForm").reset();
-        audioPreview.style.display = "none";
-        videoPreview.style.display = "none";
-        audioBlob = null;
-        videoBlob = null;
-    } catch (error) {
-        console.error("Error adding wish to Firestore:", error);
-        feedback.innerHTML = "<div class='alert alert-danger'>Failed to send your wish!</div>";
-    }
-});
+//     try {
+//         await db.collection("wishes").add({
+//             name: name || "Anonymous",
+//             message,
+//             audioURL,
+//             videoURL,
+//             approved: false,
+//             timestamp: firebase.firestore.FieldValue.serverTimestamp()
+//         });
+//         console.log("Wish added to Firestore");
+//         confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+//         feedback.innerHTML = "<div class='alert alert-success'>Your wish has been sent for approval!</div>";
+//         document.getElementById("wishForm").reset();
+//         audioPreview.style.display = "none";
+//         videoPreview.style.display = "none";
+//         audioBlob = null;
+//         videoBlob = null;
+//     } catch (error) {
+//         console.error("Error adding wish to Firestore:", error);
+//         feedback.innerHTML = "<div class='alert alert-danger'>Failed to send your wish!</div>";
+//     }
+// });
 
 // Display Wishes
 const wishesDiv = document.getElementById("wishes");
