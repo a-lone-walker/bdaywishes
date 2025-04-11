@@ -77,100 +77,100 @@ function updateTimer() {
 setInterval(updateTimer, 1000);
 
 // Audio Recording
-startAudioBtn.addEventListener('click', async () => {
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        audioRecorder = new MediaRecorder(stream);
-        audioChunks = [];
+// startAudioBtn.addEventListener('click', async () => {
+//     try {
+//         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+//         audioRecorder = new MediaRecorder(stream);
+//         audioChunks = [];
         
-        audioRecorder.ondataavailable = e => {
-            audioChunks.push(e.data);
-        };
+//         audioRecorder.ondataavailable = e => {
+//             audioChunks.push(e.data);
+//         };
         
-        audioRecorder.onstop = () => {
-            audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-            const audioURL = URL.createObjectURL(audioBlob);
-            audioPreview.src = audioURL;
-            audioPreview.style.display = 'block';
-            audioStatus.textContent = "Audio recorded! Click play to review.";
-            playAudioBtn.disabled = false;
-            audioUpload.style.display = 'none';
-        };
+//         audioRecorder.onstop = () => {
+//             audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+//             const audioURL = URL.createObjectURL(audioBlob);
+//             audioPreview.src = audioURL;
+//             audioPreview.style.display = 'block';
+//             audioStatus.textContent = "Audio recorded! Click play to review.";
+//             playAudioBtn.disabled = false;
+//             audioUpload.style.display = 'none';
+//         };
         
-        audioRecorder.start();
-        startAudioBtn.disabled = true;
-        stopAudioBtn.disabled = false;
-        startAudioBtn.classList.add('recording', 'recording-audio');
-        audioStatus.textContent = "Recording audio... Click stop when done.";
-    } catch (err) {
-        console.error("Error accessing microphone:", err);
-        audioStatus.textContent = "Error accessing microphone. Please allow permissions.";
-    }
-});
+//         audioRecorder.start();
+//         startAudioBtn.disabled = true;
+//         stopAudioBtn.disabled = false;
+//         startAudioBtn.classList.add('recording', 'recording-audio');
+//         audioStatus.textContent = "Recording audio... Click stop when done.";
+//     } catch (err) {
+//         console.error("Error accessing microphone:", err);
+//         audioStatus.textContent = "Error accessing microphone. Please allow permissions.";
+//     }
+// });
 
-stopAudioBtn.addEventListener('click', () => {
-    if (audioRecorder && audioRecorder.state !== 'inactive') {
-        audioRecorder.stop();
-        audioRecorder.stream.getTracks().forEach(track => track.stop());
-        startAudioBtn.disabled = false;
-        stopAudioBtn.disabled = true;
-        startAudioBtn.classList.remove('recording', 'recording-audio');
-    }
-});
+// stopAudioBtn.addEventListener('click', () => {
+//     if (audioRecorder && audioRecorder.state !== 'inactive') {
+//         audioRecorder.stop();
+//         audioRecorder.stream.getTracks().forEach(track => track.stop());
+//         startAudioBtn.disabled = false;
+//         stopAudioBtn.disabled = true;
+//         startAudioBtn.classList.remove('recording', 'recording-audio');
+//     }
+// });
 
-playAudioBtn.addEventListener('click', () => {
-    if (audioPreview.src) {
-        audioPreview.play();
-    }
-});
+// playAudioBtn.addEventListener('click', () => {
+//     if (audioPreview.src) {
+//         audioPreview.play();
+//     }
+// });
 
-// Video Recording
-startVideoBtn.addEventListener('click', async () => {
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        videoRecorder = new MediaRecorder(stream);
-        videoChunks = [];
+// // Video Recording
+// startVideoBtn.addEventListener('click', async () => {
+//     try {
+//         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+//         videoRecorder = new MediaRecorder(stream);
+//         videoChunks = [];
         
-        videoRecorder.ondataavailable = e => {
-            videoChunks.push(e.data);
-        };
+//         videoRecorder.ondataavailable = e => {
+//             videoChunks.push(e.data);
+//         };
         
-        videoRecorder.onstop = () => {
-            videoBlob = new Blob(videoChunks, { type: 'video/mp4' });
-            const videoURL = URL.createObjectURL(videoBlob);
-            videoPreview.src = videoURL;
-            videoPreview.style.display = 'block';
-            videoStatus.textContent = "Video recorded!";
-            videoUpload.style.display = 'none';
-        };
+//         videoRecorder.onstop = () => {
+//             videoBlob = new Blob(videoChunks, { type: 'video/mp4' });
+//             const videoURL = URL.createObjectURL(videoBlob);
+//             videoPreview.src = videoURL;
+//             videoPreview.style.display = 'block';
+//             videoStatus.textContent = "Video recorded!";
+//             videoUpload.style.display = 'none';
+//         };
         
-        // Show camera preview
-        videoPreview.srcObject = stream;
-        videoPreview.style.display = 'block';
-        videoPreview.muted = true;
-        videoPreview.play();
+//         // Show camera preview
+//         videoPreview.srcObject = stream;
+//         videoPreview.style.display = 'block';
+//         videoPreview.muted = true;
+//         videoPreview.play();
         
-        videoRecorder.start();
-        startVideoBtn.disabled = true;
-        stopVideoBtn.disabled = false;
-        startVideoBtn.classList.add('recording', 'recording-video');
-        videoStatus.textContent = "Recording video... Click stop when done.";
-    } catch (err) {
-        console.error("Error accessing camera:", err);
-        videoStatus.textContent = "Error accessing camera. Please allow permissions.";
-    }
-});
+//         videoRecorder.start();
+//         startVideoBtn.disabled = true;
+//         stopVideoBtn.disabled = false;
+//         startVideoBtn.classList.add('recording', 'recording-video');
+//         videoStatus.textContent = "Recording video... Click stop when done.";
+//     } catch (err) {
+//         console.error("Error accessing camera:", err);
+//         videoStatus.textContent = "Error accessing camera. Please allow permissions.";
+//     }
+// });
 
-stopVideoBtn.addEventListener('click', () => {
-    if (videoRecorder && videoRecorder.state !== 'inactive') {
-        videoRecorder.stop();
-        videoRecorder.stream.getTracks().forEach(track => track.stop());
-        startVideoBtn.disabled = false;
-        stopVideoBtn.disabled = true;
-        startVideoBtn.classList.remove('recording', 'recording-video');
-        videoPreview.srcObject = null;
-    }
-});
+// stopVideoBtn.addEventListener('click', () => {
+//     if (videoRecorder && videoRecorder.state !== 'inactive') {
+//         videoRecorder.stop();
+//         videoRecorder.stream.getTracks().forEach(track => track.stop());
+//         startVideoBtn.disabled = false;
+//         stopVideoBtn.disabled = true;
+//         startVideoBtn.classList.remove('recording', 'recording-video');
+//         videoPreview.srcObject = null;
+//     }
+// });
 
 // Form Submission with Progress
 document.getElementById("wishForm").addEventListener("submit", async (e) => {
